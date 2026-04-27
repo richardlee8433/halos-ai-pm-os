@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 
 /* ─── Config ─────────────────────────────────────────────────────────────── */
 
-const API_KEY = import.meta.env?.VITE_ANTHROPIC_API_KEY ?? '';
-const MODEL   = 'claude-sonnet-4-20250514';
+const API_KEY = import.meta.env?.VITE_OPENAI_API_KEY ?? '';
+const MODEL   = 'gpt-4o-mini';
 
 /* ─── Palette ────────────────────────────────────────────────────────────── */
 
@@ -575,6 +575,14 @@ export default function HalosPMOS() {
   const [input, setInput]           = useState('');
   const [loading, setLoading]       = useState(false);
   const [booted, setBooted]         = useState(false);
+  const [ledger, setLedger]         = useState([]);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedbackForm, setFeedbackForm] = useState({
+    stage:    'Stage 0 — Signal Capture',
+    topic:    '',
+    feedback: '',
+    outcome:  '',
+  });
   const messagesEndRef               = useRef(null);
   const textareaRef                  = useRef(null);
 
@@ -592,10 +600,47 @@ export default function HalosPMOS() {
     return () => clearTimeout(t);
   }, []);
 
+  // Load decision ledger from public folder
+  useEffect(() => {
+    fetch('/decision-ledger.json')
+      .then(r => r.ok ? r.json() : [])
+      .then(data => setLedger(Array.isArray(data) ? data : []))
+      .catch(() => {});
+  }, []);
+
   // Auto-scroll to latest message
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading]);
+
+  const buildSystemPrompt = () => {
+    if (!ledger.length) return SYSTEM;
+    const entries = ledger
+      .map(e => `[${e.date}] ${e.stage} | ${e.topic}: ${e.feedback}${e.outcome ? ` → ${e.outcome}` : ''}`)
+      .join('\n');
+    return SYSTEM + `\n\n---\nDECISION LEDGER (${ledger.length} entries — reference these when relevant):\n${entries}`;
+  };
+
+  const downloadEntry = () => {
+    if (!feedbackForm.topic.trim() || !feedbackForm.feedback.trim()) return;
+    const entry = {
+      id:       Date.now().toString(),
+      date:     new Date().toISOString().split('T')[0],
+      stage:    feedbackForm.stage,
+      topic:    feedbackForm.topic.trim(),
+      feedback: feedbackForm.feedback.trim(),
+      outcome:  feedbackForm.outcome.trim(),
+    };
+    const blob = new Blob([JSON.stringify(entry, null, 2)], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `ledger-${entry.date}-${entry.id.slice(-4)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    setShowFeedback(false);
+    setFeedbackForm({ stage: 'Stage 0 — Signal Capture', topic: '', feedback: '', outcome: '' });
+  };
 
   const sendMessage = async (text) => {
     const userText = (text ?? input).trim();
@@ -607,19 +652,19 @@ export default function HalosPMOS() {
     setLoading(true);
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
-          'x-api-key':                            API_KEY,
-          'anthropic-version':                    '2023-06-01',
-          'content-type':                         'application/json',
-          'anthropic-dangerous-direct-browser-access': 'true',
+          'Authorization': `Bearer ${API_KEY}`,
+          'Content-Type':  'application/json',
         },
         body: JSON.stringify({
           model:      MODEL,
           max_tokens: 1000,
-          system:     SYSTEM,
-          messages:   history,
+          messages:   [
+            { role: 'system', content: buildSystemPrompt() },
+            ...history,
+          ],
         }),
       });
 
@@ -629,7 +674,7 @@ export default function HalosPMOS() {
       }
 
       const data  = await res.json();
-      const reply = data.content?.[0]?.text ?? '[No response received]';
+      const reply = data.choices?.[0]?.message?.content ?? '[No response received]';
       setMessages([...history, { role: 'assistant', content: reply }]);
     } catch (err) {
       setMessages([...history, {
@@ -739,8 +784,48 @@ export default function HalosPMOS() {
         <section style={S.rightPanel}>
 
           {/* Panel header */}
-          <div style={S.panelHeader}>
-            INTERACTIVE SESSION — Ask anything about product decisions, trade-offs, or working style
+          <div style={{ ...S.panelHeader, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span>INTERACTIVE SESSION — Ask anything about product decisions, trade-offs, or working style</span>
+            <div style={{ display: 'flex', gap: 8, flexShrink: 0, marginLeft: 16 }}>
+              <button
+                onClick={() => setShowFeedback(true)}
+                style={{
+                  background:    'transparent',
+                  border:        `1px solid ${C.accentBdr}`,
+                  borderRadius:  3,
+                  color:         C.accent,
+                  fontSize:      9,
+                  letterSpacing: '0.10em',
+                  padding:       '3px 8px',
+                  cursor:        'pointer',
+                  transition:    'background 0.15s',
+                }}
+                onMouseEnter={e => { e.target.style.background = C.accentBg; }}
+                onMouseLeave={e => { e.target.style.background = 'transparent'; }}
+              >
+                + LOG FEEDBACK
+              </button>
+              {messages.length > 0 && (
+                <button
+                  onClick={() => setMessages([])}
+                  style={{
+                    background:    'transparent',
+                    border:        `1px solid ${C.border}`,
+                    borderRadius:  3,
+                    color:         C.dim,
+                    fontSize:      9,
+                    letterSpacing: '0.10em',
+                    padding:       '3px 8px',
+                    cursor:        'pointer',
+                    transition:    'color 0.15s, border-color 0.15s',
+                  }}
+                  onMouseEnter={e => { e.target.style.color = C.accent; e.target.style.borderColor = C.accentBdr; }}
+                  onMouseLeave={e => { e.target.style.color = C.dim;    e.target.style.borderColor = C.border; }}
+                >
+                  ← RESET
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Messages / empty state */}
@@ -778,7 +863,7 @@ export default function HalosPMOS() {
                 {messages.map((msg, i) => (
                   <div key={i} style={S.message}>
                     <div style={S.msgLabel(msg.role)}>
-                      {msg.role === 'user' ? 'NEIL MONTGOMERY' : 'PM OS · RICHARD LEE'}
+                      {msg.role === 'user' ? '>' : 'PM OS · RICHARD LEE'}
                     </div>
                     <div style={S.msgText}>{msg.content}</div>
                   </div>
@@ -830,6 +915,175 @@ export default function HalosPMOS() {
 
         </section>
       </div>
+      {/* ── Feedback Modal ── */}
+      {showFeedback && (
+        <div
+          style={{
+            position:       'fixed',
+            inset:          0,
+            background:     'rgba(0,0,0,0.72)',
+            display:        'flex',
+            alignItems:     'center',
+            justifyContent: 'center',
+            zIndex:         200,
+          }}
+          onClick={e => { if (e.target === e.currentTarget) setShowFeedback(false); }}
+        >
+          <div style={{
+            background:   C.panel,
+            border:       `1px solid ${C.accentBdr}`,
+            borderRadius: 6,
+            width:        480,
+            maxWidth:     '90vw',
+          }}>
+            {/* Modal header */}
+            <div style={{
+              padding:       '12px 16px',
+              fontSize:      11,
+              fontWeight:    700,
+              letterSpacing: '0.12em',
+              color:         C.accent,
+              borderBottom:  `1px solid ${C.border}`,
+              background:    C.panelAlt,
+            }}>
+              LOG FEEDBACK ENTRY
+              {ledger.length > 0 && (
+                <span style={{ fontSize: 9, color: C.dim, marginLeft: 12, fontWeight: 400 }}>
+                  {ledger.length} entries in ledger
+                </span>
+              )}
+            </div>
+
+            {/* Modal body */}
+            <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+
+              {/* Stage */}
+              <div>
+                <div style={{ fontSize: 9, color: C.dim, letterSpacing: '0.10em', fontWeight: 700, marginBottom: 4 }}>STAGE</div>
+                <select
+                  value={feedbackForm.stage}
+                  onChange={e => setFeedbackForm(f => ({ ...f, stage: e.target.value }))}
+                  style={{
+                    width: '100%', background: C.input, border: `1px solid ${C.border}`,
+                    borderRadius: 4, padding: '8px 10px', fontSize: 12, color: C.text,
+                    fontFamily: 'inherit',
+                  }}
+                >
+                  {[
+                    'Use Case Layer',
+                    'Stage 0 — Signal Capture',
+                    'Stage 1 — Functional Demo',
+                    'Stage 2 — Decomposition',
+                    'Stage 3 — Dual Specification',
+                    'Stage 4 — Testing & Gates',
+                    'Stage 5 — Monitoring & Iteration',
+                  ].map(s => <option key={s} value={s}>{s}</option>)}
+                </select>
+              </div>
+
+              {/* Topic */}
+              <div>
+                <div style={{ fontSize: 9, color: C.dim, letterSpacing: '0.10em', fontWeight: 700, marginBottom: 4 }}>TOPIC / DECISION</div>
+                <input
+                  type="text"
+                  placeholder="e.g. AI confidence threshold, GDPR Art.9 re-ID block"
+                  value={feedbackForm.topic}
+                  onChange={e => setFeedbackForm(f => ({ ...f, topic: e.target.value }))}
+                  style={{
+                    width: '100%', background: C.input,
+                    border: `1px solid ${feedbackForm.topic ? C.accentBdr : C.border}`,
+                    borderRadius: 4, padding: '8px 10px', fontSize: 12, color: C.text,
+                    fontFamily: 'inherit',
+                  }}
+                />
+              </div>
+
+              {/* Feedback */}
+              <div>
+                <div style={{ fontSize: 9, color: C.dim, letterSpacing: '0.10em', fontWeight: 700, marginBottom: 4 }}>FEEDBACK / OBSERVATION</div>
+                <textarea
+                  rows={3}
+                  placeholder="What did you learn, observe, or want the OS to remember?"
+                  value={feedbackForm.feedback}
+                  onChange={e => setFeedbackForm(f => ({ ...f, feedback: e.target.value }))}
+                  style={{
+                    width: '100%', background: C.input,
+                    border: `1px solid ${feedbackForm.feedback ? C.accentBdr : C.border}`,
+                    borderRadius: 4, padding: '8px 10px', fontSize: 12, color: C.text,
+                    fontFamily: 'inherit', lineHeight: 1.5,
+                  }}
+                />
+              </div>
+
+              {/* Outcome */}
+              <div>
+                <div style={{ fontSize: 9, color: C.dim, letterSpacing: '0.10em', fontWeight: 700, marginBottom: 4 }}>
+                  OUTCOME / NEXT ACTION <span style={{ fontWeight: 400 }}>(optional)</span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="e.g. Raise threshold to 0.92, add human review gate"
+                  value={feedbackForm.outcome}
+                  onChange={e => setFeedbackForm(f => ({ ...f, outcome: e.target.value }))}
+                  style={{
+                    width: '100%', background: C.input, border: `1px solid ${C.border}`,
+                    borderRadius: 4, padding: '8px 10px', fontSize: 12, color: C.text,
+                    fontFamily: 'inherit',
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Modal footer */}
+            <div style={{
+              padding: '12px 16px', borderTop: `1px solid ${C.border}`,
+              display: 'flex', gap: 8, justifyContent: 'flex-end',
+            }}>
+              <button
+                onClick={() => setShowFeedback(false)}
+                style={{
+                  background: 'transparent', border: `1px solid ${C.border}`,
+                  borderRadius: 4, color: C.dim, fontSize: 10, letterSpacing: '0.10em',
+                  padding: '7px 14px', cursor: 'pointer', fontFamily: 'inherit',
+                }}
+              >
+                CANCEL
+              </button>
+              <button
+                onClick={downloadEntry}
+                disabled={!feedbackForm.topic.trim() || !feedbackForm.feedback.trim()}
+                style={{
+                  background:    (!feedbackForm.topic.trim() || !feedbackForm.feedback.trim()) ? C.dim : C.accent,
+                  border:        'none',
+                  borderRadius:  4,
+                  color:         '#fff',
+                  fontSize:      10,
+                  letterSpacing: '0.10em',
+                  fontWeight:    700,
+                  padding:       '7px 14px',
+                  cursor:        (!feedbackForm.topic.trim() || !feedbackForm.feedback.trim()) ? 'not-allowed' : 'pointer',
+                  fontFamily:    'inherit',
+                  opacity:       (!feedbackForm.topic.trim() || !feedbackForm.feedback.trim()) ? 0.45 : 1,
+                }}
+              >
+                ↓ DOWNLOAD ENTRY
+              </button>
+            </div>
+
+            {/* Instructions */}
+            <div style={{
+              padding:       '8px 16px 12px',
+              fontSize:      9,
+              color:         C.dim,
+              letterSpacing: '0.06em',
+              lineHeight:    1.6,
+            }}>
+              Download the JSON → add it to <code style={{ color: C.dimMid }}>decision-ledger.json</code> in the repo → push to GitHub → Netlify redeploys → OS remembers it permanently.
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
