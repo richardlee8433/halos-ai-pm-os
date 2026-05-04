@@ -1,2 +1,5 @@
 halos-pm-os/
 .claude/
+.env
+*.env
+agents/market-analysis/weekly-reports/*.raw.json

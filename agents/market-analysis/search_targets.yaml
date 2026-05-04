@@ -1,0 +1,66 @@
+# HALOS Market Intelligence — Search Targets
+# Edit this file to add/remove/adjust search queries.
+# priority: high | medium | low
+
+competitors:
+  - id: axon_product
+    query: "Axon Enterprise new product announcement evidence.com 2025 2026"
+    priority: high
+
+  - id: axon_europe
+    query: "Axon Enterprise Europe UK Ireland law enforcement contract"
+    priority: high
+
+  - id: cellebrite_ai
+    query: "Cellebrite Guardian AI digital evidence management update"
+    priority: high
+
+  - id: motorola_bwc
+    query: "Motorola Solutions body camera DEMS SVX Assist AI"
+    priority: medium
+
+  - id: veritone_idems
+    query: "Veritone iDEMS AI law enforcement update 2025 2026"
+    priority: medium
+
+  - id: wrap_technologies
+    query: "Wrap Technologies WrapAI body camera update"
+    priority: medium
+
+regulatory:
+  - id: cjis_update
+    query: "CJIS v6.1 FBI CJIS update law enforcement compliance 2025 2026"
+    priority: high
+
+  - id: gdpr_led
+    query: "EU Law Enforcement Directive GDPR video evidence police update"
+    priority: high
+
+  - id: cjis_audit
+    query: "CJIS audit compliance law enforcement digital evidence 2025"
+    priority: medium
+
+  - id: ai_court
+    query: "AI evidence court admissibility ruling law enforcement 2025 2026"
+    priority: medium
+
+market_signals:
+  - id: bwc_deployment
+    query: "police body camera deployment contract UK Ireland Europe 2025 2026"
+    priority: high
+
+  - id: dems_procurement
+    query: "digital evidence management system procurement RFP law enforcement 2025"
+    priority: high
+
+  - id: rcmp_update
+    query: "RCMP body camera deployment update Canada police"
+    priority: medium
+
+  - id: ma_activity
+    query: "digital evidence management law enforcement acquisition merger 2025"
+    priority: medium
+
+  - id: budget_signal
+    query: "UK Ireland police budget technology investment 2025 2026"
+    priority: low
