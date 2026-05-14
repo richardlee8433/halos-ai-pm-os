@@ -15,10 +15,20 @@
 - [ ] Does FCA Consumer Duty (live July 2023) create a compliance mandate for video evidence management in claims handling?
 - [ ] Who is the buyer — Head of Claims, Chief Risk Officer, or Counter-Fraud team?
 
+### Workplace Safety
+- [ ] What specific video documentation solutions are currently used to address compliance and prevent workplace injuries?
+  
+### Compliance and Audit
+- [ ] What types of technology are organizations implementing for continuous compliance monitoring?
+
+### Environmental Regulation
+- [ ] How are businesses currently documenting their environmental compliance, and what gaps exist in these processes?
+
 ---
 
 ## Confirmed
 - [x] The compliance burden is getting heavier: 96% of organizations say it’s challenging to keep up with the growing number of industry regulations. (Connectivity to compliance mandates supporting evidence management)
+- [x] Companies in workplace safety face challenges with compliance reviews due to manual bottlenecks and slow processes. (Reflects pain points discussed in the brief)
 
 ---
 
@@ -30,11 +40,8 @@
 ## New Blocking Questions
 
 ### Workplace Safety
-- [ ] What specific video documentation solutions are currently used to address compliance and prevent workplace injuries?
-
-### Compliance and Audit
-- [ ] What types of technology are organizations implementating for continuous compliance monitoring?
+- [ ] How are companies currently documenting compliance with OSHA regulations, and what challenges do they face?
   
-### Environmental Regulation
-- [ ] How are businesses currently documenting their environmental compliance, and what gaps exist in these processes?
+### Environmental Compliance
+- [ ] What specific compliance documentation practices are being adopted due to the UK Environment Agency's strengthened enforcement policies?
 ```

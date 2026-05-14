@@ -20,14 +20,15 @@ from openai import OpenAI
 from tavily import TavilyClient
 from dotenv import load_dotenv
 
-load_dotenv()
-
-# ── Paths ────────────────────────────────────────────────────────────────────
+# ── Paths (defaults; overridden by --config-dir in main) ─────────────────────
 BASE_DIR = Path(__file__).parent
+
+load_dotenv(BASE_DIR / ".env")
 TARGETS_FILE = BASE_DIR / "discovery_targets.yaml"
 CONTEXT_FILE = BASE_DIR / "opportunity_context.md"
 RESEARCH_LOG = BASE_DIR / "research_log.md"
 BRIEFS_DIR = BASE_DIR / "opportunity-briefs"
+PROMPT_TEMPLATE = BASE_DIR / "prompt_template.md"  # optional — overrides built-in prompt if present
 BRIEFS_DIR.mkdir(exist_ok=True)
 
 # ── Config ───────────────────────────────────────────────────────────────────
@@ -58,7 +59,7 @@ def search_tavily(query: str, days_back: int = 30) -> list[dict]:
 
 def run_searches(targets: dict, days_back: int = 30) -> list[dict]:
     all_results = []
-    layers = ["pain_signals", "adoption_signals", "trigger_signals"]
+    layers = [k for k in targets.keys() if not k.startswith("#")]
 
     for layer in layers:
         for target in targets.get(layer, []):
@@ -91,6 +92,16 @@ def run_searches(targets: dict, days_back: int = 30) -> list[dict]:
 def build_discovery_prompt(search_data: list[dict], context: str, research_log: str, month_label: str) -> str:
     results_text = json.dumps(search_data, ensure_ascii=False, indent=2)
     today = datetime.now().strftime("%Y-%m-%d")
+
+    if PROMPT_TEMPLATE.exists():
+        template = PROMPT_TEMPLATE.read_text(encoding="utf-8")
+        return template.format(
+            context=context,
+            research_log=research_log,
+            results_text=results_text,
+            month_label=month_label,
+            today=today,
+        )
 
     return f"""You are the Market Discovery agent for Video Wisdom, a Video Forensics Platform.
 Your job is to find industries that need video analysis but that Video Wisdom has not yet considered.
@@ -276,10 +287,22 @@ def get_brief_filename() -> Path:
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
+    global TARGETS_FILE, CONTEXT_FILE, RESEARCH_LOG, BRIEFS_DIR, PROMPT_TEMPLATE
+
     parser = argparse.ArgumentParser(description="Video Wisdom Market Discovery Agent")
     parser.add_argument("--dry-run", action="store_true", help="Search only, skip OpenAI analysis")
     parser.add_argument("--days", type=int, default=30, help="Search freshness window in days (default: 30)")
+    parser.add_argument("--config-dir", type=str, default=None, help="Path to config directory containing yaml/context/prompt files (default: script directory)")
     args = parser.parse_args()
+
+    if args.config_dir:
+        config_dir = Path(args.config_dir)
+        TARGETS_FILE = config_dir / "discovery_targets.yaml"
+        CONTEXT_FILE = config_dir / "opportunity_context.md"
+        RESEARCH_LOG = config_dir / "research_log.md"
+        BRIEFS_DIR = config_dir / "opportunity-briefs"
+        PROMPT_TEMPLATE = config_dir / "prompt_template.md"
+        BRIEFS_DIR.mkdir(exist_ok=True)
 
     month_label = get_month_label()
     brief_path = get_brief_filename()

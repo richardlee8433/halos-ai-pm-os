@@ -1,10 +1,9 @@
-# Video Wisdom Market Discovery — Search Targets (v2)
-# Goal: find industries we haven't thought of that need video analysis + have a pain point
-# Strategy: search by SIGNAL, not by vertical — let the AI surface unexpected industries
+# Video Wisdom Market Discovery — Search Targets (v3)
+# Goal: find industries with demand for video analysis that we haven't considered
+# Strategy: generic pain signals + US-specific + UK-specific regulatory context
 # Run monthly.
 
-# Layer 1: Pain signals — who is frustrated with video evidence right now?
-# No vertical names. Find who is complaining, not who we expect.
+# Layer 1: Generic pain signals — no geography, find who is frustrated
 pain_signals:
   - id: video_evidence_rejected
     query: "video footage evidence court rejected inadmissible compliance challenge enterprise 2025"
@@ -14,57 +13,90 @@ pain_signals:
     query: "manual video review process too slow compliance audit bottleneck 2025"
     priority: high
 
-  - id: video_tamper_proof_demand
-    query: "tamper proof video evidence audit trail enterprise non-police demand 2025"
-    priority: high
-
   - id: incident_video_unusable
     query: "incident video footage unusable legal dispute insurance enterprise 2025 2026"
     priority: high
 
-  - id: video_documentation_broken
-    query: "video documentation workflow broken slow expensive enterprise compliance 2025"
+  - id: video_tamper_proof_demand
+    query: "tamper proof video evidence audit trail enterprise non-police demand 2025"
     priority: medium
-
-# Layer 2: Technology adoption signals — who is actively looking for a solution?
-adoption_signals:
-  - id: ai_video_analysis_pilot
-    query: "AI video analysis enterprise pilot deployment non-security use case 2025 2026"
-    priority: high
-
-  - id: video_analytics_procurement
-    query: "video analytics software procurement RFP enterprise UK EU 2025"
-    priority: high
 
   - id: body_cam_unexpected_deployment
     query: "body worn camera deployment unexpected industry non-police enterprise 2025 2026"
+    priority: medium
+
+# Layer 2: US-specific signals — target US regulators and industry bodies
+us_signals:
+  - id: osha_video_inspection
+    query: "OSHA inspection video evidence documentation compliance workplace US 2025"
     priority: high
 
-  - id: computer_vision_compliance
-    query: "computer vision compliance monitoring enterprise industry adoption 2025"
+  - id: epa_video_enforcement
+    query: "EPA enforcement video documentation site inspection compliance US 2025 2026"
+    priority: high
+
+  - id: fmcsa_dashcam_fleet
+    query: "FMCSA commercial fleet dashcam video evidence insurance compliance US 2025"
+    priority: high
+
+  - id: naic_insurance_video
+    query: "NAIC insurance claims video evidence fraud detection platform US 2025"
+    priority: high
+
+  - id: finra_compliance_video
+    query: "FINRA compliance video surveillance trading floor documentation US 2025"
     priority: medium
 
-  - id: video_evidence_software_rfp
-    query: "video evidence management platform RFP tender enterprise 2025 UK Europe"
+  - id: us_construction_safety_video
+    query: "construction site safety OSHA video documentation incident proof US 2025"
     priority: medium
 
-# Layer 3: Trigger signals — what is forcing industries to act now?
-# Triggers can be regulatory, incident-driven, cost-driven, or competitive gap
+  - id: us_healthcare_incident_video
+    query: "hospital healthcare worker incident video evidence documentation HIPAA US 2025"
+    priority: medium
+
+  - id: us_retail_video_evidence
+    query: "retail loss prevention video evidence management platform RFP US 2025"
+    priority: medium
+
+# Layer 3: UK-specific signals — target UK regulators and industry bodies
+uk_signals:
+  - id: hse_inspection_video
+    query: "HSE health safety executive inspection video evidence documentation UK 2025"
+    priority: high
+
+  - id: fca_insurance_video
+    query: "FCA insurance claims handling video evidence compliance Consumer Duty UK 2025"
+    priority: high
+
+  - id: uk_fleet_dashcam_fraud
+    query: "UK commercial fleet dashcam crash for cash fraud insurance video evidence 2025"
+    priority: high
+
+  - id: environment_agency_video
+    query: "Environment Agency enforcement video documentation compliance UK 2025 2026"
+    priority: medium
+
+  - id: uk_retail_incident_video
+    query: "UK retail incident management video evidence body camera loss prevention 2025"
+    priority: medium
+
+  - id: cqc_healthcare_video
+    query: "CQC care quality commission inspection video evidence documentation UK 2025"
+    priority: medium
+
+# Layer 4: Trigger signals — what is forcing action now in either market
 trigger_signals:
-  - id: new_video_evidence_requirement
-    query: "industry new video evidence documentation requirement obligation 2025 2026 UK EU"
-    priority: high
-
-  - id: workplace_incident_video_pressure
-    query: "workplace incident video proof insurance legal pressure enterprise 2025"
-    priority: high
-
   - id: ai_cost_drop_video
     query: "AI video analysis cost reduction affordable SMB enterprise 2025 accessible"
-    priority: medium
+    priority: high
 
   - id: industry_incident_trigger
     query: "industry scandal investigation video evidence gap exposed 2025 2026"
+    priority: medium
+
+  - id: video_analytics_procurement
+    query: "video analytics software procurement RFP enterprise US UK 2025"
     priority: medium
 
   - id: compliance_audit_video_failure
