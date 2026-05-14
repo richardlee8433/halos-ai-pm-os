@@ -1,0 +1,72 @@
+# HALOS Market Discovery — Search Targets (v2)
+# Goal: find industries we haven't thought of that need video analysis + have a pain point
+# Strategy: search by SIGNAL, not by vertical — let the AI surface unexpected industries
+# Run monthly.
+
+# Layer 1: Pain signals — who is frustrated with video evidence right now?
+# No vertical names. Find who is complaining, not who we expect.
+pain_signals:
+  - id: video_evidence_rejected
+    query: "video footage evidence court rejected inadmissible compliance challenge enterprise 2025"
+    priority: high
+
+  - id: manual_video_review_slow
+    query: "manual video review process too slow compliance audit bottleneck 2025"
+    priority: high
+
+  - id: video_tamper_proof_demand
+    query: "tamper proof video evidence audit trail enterprise non-police demand 2025"
+    priority: high
+
+  - id: incident_video_unusable
+    query: "incident video footage unusable legal dispute insurance enterprise 2025 2026"
+    priority: high
+
+  - id: video_documentation_broken
+    query: "video documentation workflow broken slow expensive enterprise compliance 2025"
+    priority: medium
+
+# Layer 2: Technology adoption signals — who is actively looking for a solution?
+adoption_signals:
+  - id: ai_video_analysis_pilot
+    query: "AI video analysis enterprise pilot deployment non-security use case 2025 2026"
+    priority: high
+
+  - id: video_analytics_procurement
+    query: "video analytics software procurement RFP enterprise UK EU 2025"
+    priority: high
+
+  - id: body_cam_unexpected_deployment
+    query: "body worn camera deployment unexpected industry non-police enterprise 2025 2026"
+    priority: high
+
+  - id: computer_vision_compliance
+    query: "computer vision compliance monitoring enterprise industry adoption 2025"
+    priority: medium
+
+  - id: video_evidence_software_rfp
+    query: "video evidence management platform RFP tender enterprise 2025 UK Europe"
+    priority: medium
+
+# Layer 3: Trigger signals — what is forcing industries to act now?
+# Triggers can be regulatory, incident-driven, cost-driven, or competitive gap
+trigger_signals:
+  - id: new_video_evidence_requirement
+    query: "industry new video evidence documentation requirement obligation 2025 2026 UK EU"
+    priority: high
+
+  - id: workplace_incident_video_pressure
+    query: "workplace incident video proof insurance legal pressure enterprise 2025"
+    priority: high
+
+  - id: ai_cost_drop_video
+    query: "AI video analysis cost reduction affordable SMB enterprise 2025 accessible"
+    priority: medium
+
+  - id: industry_incident_trigger
+    query: "industry scandal investigation video evidence gap exposed 2025 2026"
+    priority: medium
+
+  - id: compliance_audit_video_failure
+    query: "compliance audit failed video evidence inadequate enterprise sector 2025"
+    priority: medium
