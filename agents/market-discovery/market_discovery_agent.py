@@ -26,6 +26,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).parent
 TARGETS_FILE = BASE_DIR / "discovery_targets.yaml"
 CONTEXT_FILE = BASE_DIR / "opportunity_context.md"
+RESEARCH_LOG = BASE_DIR / "research_log.md"
 BRIEFS_DIR = BASE_DIR / "opportunity-briefs"
 BRIEFS_DIR.mkdir(exist_ok=True)
 
@@ -87,7 +88,7 @@ def run_searches(targets: dict, days_back: int = 30) -> list[dict]:
 
 # ── Analysis ─────────────────────────────────────────────────────────────────
 
-def build_discovery_prompt(search_data: list[dict], context: str, month_label: str) -> str:
+def build_discovery_prompt(search_data: list[dict], context: str, research_log: str, month_label: str) -> str:
     results_text = json.dumps(search_data, ensure_ascii=False, indent=2)
     today = datetime.now().strftime("%Y-%m-%d")
 
@@ -98,6 +99,14 @@ Do NOT start from HALOS's product. Start from the search results and surface wha
 ## HALOS Platform Context (background only — do not use to filter results)
 
 {context}
+
+---
+
+## Open Research Questions from Previous Runs
+These are blocking questions from past briefs that are still unresolved.
+If any search results this month partially answer these, note it in your output.
+
+{research_log}
 
 ---
 
@@ -191,9 +200,59 @@ Evidence quality: [how many results, how concrete]
 """
 
 
+def build_log_update_prompt(brief: str, current_log: str, month_label: str) -> str:
+    return f"""You are updating a research log for HALOS Market Discovery.
+
+## This Month's Market Map Brief ({month_label})
+
+{brief}
+
+---
+
+## Current Research Log
+
+{current_log}
+
+---
+
+## Your task
+
+1. REVIEW OPEN QUESTIONS: For each open question in the log, did this month's brief
+   provide any evidence? If yes, note the finding and mark it as confirmed or killed.
+   If no new evidence, leave it as open.
+
+2. NEW BLOCKING QUESTIONS: Extract any new blocking questions from this month's brief
+   that are not already in the log. Add them under the relevant industry heading.
+
+Output the COMPLETE updated research_log.md content, preserving the exact format:
+- Open questions: [ ] prefix
+- Confirmed: [x] prefix + one line of evidence
+- Killed: [~] prefix + one line of why
+
+Only output the markdown file content. No explanation, no preamble.
+"""
+
+
+def update_research_log(brief: str, month_label: str) -> None:
+    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    current_log = RESEARCH_LOG.read_text(encoding="utf-8")
+    prompt = build_log_update_prompt(brief, current_log, month_label)
+
+    print("  Updating research log ...")
+    response = client.chat.completions.create(
+        model=MODEL,
+        max_tokens=1500,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    updated_log = response.choices[0].message.content.strip()
+    RESEARCH_LOG.write_text(updated_log, encoding="utf-8")
+    print(f"  Research log updated: {RESEARCH_LOG}")
+
+
 def analyze_with_openai(search_data: list[dict], context: str, month_label: str) -> str:
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
-    prompt = build_discovery_prompt(search_data, context, month_label)
+    research_log = RESEARCH_LOG.read_text(encoding="utf-8") if RESEARCH_LOG.exists() else ""
+    prompt = build_discovery_prompt(search_data, context, research_log, month_label)
 
     print("  Sending to OpenAI for analysis ...")
     response = client.chat.completions.create(
@@ -244,11 +303,15 @@ def main():
         print(f"Dry run complete. Raw results saved to: {raw_path}")
         return
 
-    print("[ 2/2 ] Analysing with OpenAI ...")
+    print("[ 2/3 ] Analysing with OpenAI ...")
     brief_content = analyze_with_openai(search_data, context, month_label)
 
     brief_path.write_text(brief_content, encoding="utf-8")
-    print(f"\nOpportunity brief saved: {brief_path}")
+    print(f"  Opportunity brief saved: {brief_path}")
+
+    print("[ 3/3 ] Updating research log ...")
+    update_research_log(brief_content, month_label)
+
     print("\nDone.")
 
 
