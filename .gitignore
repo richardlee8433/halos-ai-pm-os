@@ -3,3 +3,6 @@ halos-pm-os/
 .env
 *.env
 agents/market-analysis/weekly-reports/*.raw.json
+agents/market-analysis/weekly-reports/run.log
+agents/market-discovery/opportunity-briefs/*.raw.json
+agents/market-discovery/opportunity-briefs/run.log
