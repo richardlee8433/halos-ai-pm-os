@@ -80,7 +80,7 @@ Capture → Upload → Tag → [REVIEW] → Export → Court Submission
 ```
 Basis:         Axon Evidence pricing ~$0.10/GB storage
                Gemini 1.5 Flash two-layer architecture @ 1,000hr = <$30
-Target margin: HALOS must stay below $0.003/min to be margin-positive
+Target margin: Video Wisdom must stay below $0.003/min to be margin-positive
 Result:        $30 per 1,000hr = $0.0005/min — within ceiling
 Hard ceiling:  $0.003/min (6x headroom at current architecture)
 ```
@@ -91,8 +91,8 @@ Hard ceiling:  $0.003/min (6x headroom at current architecture)
 Known blockers:
   ⚠ GDPR Art. 9 — biometric data processing (face/person Re-ID in v7.0)
     requires explicit legal basis; no basis documented yet
-  ⚠ CJPD / Irish Data Protection Act — law enforcement data processing
-    constraints apply to HALOS's Ireland base
+  ⚠ CJPD / Data Protection Acts — law enforcement data processing
+    constraints apply to Video Wisdom's operating jurisdictions
   ⚠ Chain-of-custody — AI-modified metadata must be logged separately
     from original; current audit log does not distinguish AI writes
     from human writes

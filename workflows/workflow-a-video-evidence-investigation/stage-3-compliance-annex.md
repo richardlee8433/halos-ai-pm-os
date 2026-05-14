@@ -30,15 +30,14 @@
 
 ## 2. GDPR / Data Sovereignty Constraints
 
-**Applicable frameworks (HALOS Ireland base)**
+**Applicable frameworks (Video Wisdom)**
 - EU Law Enforcement Directive (LED) — governs processing of personal data by competent authorities for law enforcement purposes
-- Irish Data Protection Act 2018 — transposes LED into Irish law
 - GDPR (Regulation 2016/679) — applies to processing outside strict law enforcement scope (e.g. admin, HR, billing)
 
 **Standard video analysis (v1.0–v8.0)**
 - Body cam footage containing identifiable persons: processed under LED Art. 8 (lawfulness of processing) — processing must be necessary for the performance of a task in the public interest
 - Data minimisation: only frames passing L1 filter are sent to AI — no unnecessary data transmission
-- Retention: HALOS must support configurable retention periods per agency policy; no footage retained beyond agency-defined limits
+- Retention: Video Wisdom must support configurable retention periods per agency policy; no footage retained beyond agency-defined limits
 - Data residency: EU-hosted processing required for EU law enforcement customers; cross-border transfer restrictions apply
 
 **⚠ CRITICAL — Tactical-Link Re-ID (v7.0): BLOCKED**
@@ -104,7 +103,7 @@
 
 **Proprietary format handling**
 - Many body cam manufacturers use proprietary formats (.dav, .dat, .dga)
-- If HALOS re-encodes to a standard format for analysis, the original proprietary file must be preserved alongside the re-encoded version
+- If Video Wisdom re-encodes to a standard format for analysis, the original proprietary file must be preserved alongside the re-encoded version
 - Re-encoding event must be logged in audit trail with: original format, target format, tool used, operator ID
 
 ---

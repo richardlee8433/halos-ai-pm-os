@@ -28,7 +28,7 @@ Two years ago, large-scale video analysis was cost-prohibitive for mid-sized ins
 
 ## The Customer Pain
 
-*In their own words, not HALOS language:*
+*In their own words, not Video Wisdom language:*
 
 - "We receive dashcam clips from 40 different device brands. Half of them won't open in our claims system."
 - "By the time we've retrieved and reviewed the footage, the fraud window has closed."
@@ -52,7 +52,7 @@ Two years ago, large-scale video analysis was cost-prohibitive for mid-sized ins
 
 ---
 
-## HALOS Platform Fit
+## Video Wisdom Platform Fit
 
 This maps directly to the 12–24 month platform direction:
 
@@ -63,7 +63,7 @@ AI analysis               → flag anomalies, surface fraud signals
 Compliance export         → court-ready package for disputed claims
 ```
 
-HALOS does not need to manufacture a single new camera to serve this market. The video already exists. The platform is the product.
+Video Wisdom does not need to manufacture a single new camera to serve this market. The video already exists. The platform is the product.
 
 Deployment speed moat applies: insurers need this live before next claims cycle, not in 6 months.
 

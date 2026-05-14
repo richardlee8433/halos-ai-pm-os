@@ -1,19 +1,19 @@
-# HALOS Platform Context
+# Video Wisdom Platform Context
 # Background for the Market Discovery agent.
-# This is NOT a filter — do not use this to score results against HALOS fit.
-# Use it only to understand what HALOS does, so you can recognise pain patterns.
+# This is NOT a filter — do not use this to score results against Video Wisdom fit.
+# Use it only to understand what Video Wisdom does, so you can recognise pain patterns.
 
-## What HALOS Does
+## What Video Wisdom Does
 Body cameras + cloud-based video evidence management platform.
 Core capability: tamper-evident video capture, chain-of-custody, compliance export,
 incident documentation, AI-assisted tagging and search.
 
 ## Platform Direction (12–24 months)
-HALOS is moving toward a vendor-agnostic software platform:
+Video Wisdom is moving toward a vendor-agnostic software platform:
 ingest video from any source — body cameras, CCTV, S3, third-party cameras.
 The platform sells on its own merits, independent of hardware.
 
-## The Pain Pattern HALOS Solves
+## The Pain Pattern Video Wisdom Solves
 People need to:
 - Capture video of an incident
 - Prove the video has not been tampered with

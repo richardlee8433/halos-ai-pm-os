@@ -1,5 +1,5 @@
 """
-HALOS Market Discovery Agent
+Video Wisdom Market Discovery Agent
 Runs monthly searches to find non-enforcement verticals with the same pain as law enforcement.
 Outputs an Opportunity Brief — ranked by (pain fit × solution confidence ÷ entry cost).
 
@@ -92,11 +92,11 @@ def build_discovery_prompt(search_data: list[dict], context: str, research_log: 
     results_text = json.dumps(search_data, ensure_ascii=False, indent=2)
     today = datetime.now().strftime("%Y-%m-%d")
 
-    return f"""You are the Market Discovery agent for HALOS, a Video Forensics Platform.
-Your job is to find industries that need video analysis but that HALOS has not yet considered.
-Do NOT start from HALOS's product. Start from the search results and surface what you find.
+    return f"""You are the Market Discovery agent for Video Wisdom, a Video Forensics Platform.
+Your job is to find industries that need video analysis but that Video Wisdom has not yet considered.
+Do NOT start from Video Wisdom's product. Start from the search results and surface what you find.
 
-## HALOS Platform Context (background only — do not use to filter results)
+## Video Wisdom Platform Context (background only — do not use to filter results)
 
 {context}
 
@@ -152,15 +152,15 @@ Read the search results and answer these questions for each industry that appear
 - DATE FILTER: Only include results published within 60 days of {today}, or undated results with clearly recent content.
 - Only write up an industry if you found actual evidence in the search results. Do not invent.
 - Surprise score 1 industries (law enforcement-adjacent): list them in "Already Known" and skip the full brief.
-- Prioritise UK and Ireland signals. European signals are secondary.
-- Quote the source results — do not paraphrase the pain into HALOS language.
-- No scoring against HALOS fit. That is a separate exercise. This brief is about what is true in the market.
+- Prioritise US and UK signals. European signals are secondary.
+- Quote the source results — do not paraphrase the pain into Video Wisdom language.
+- No scoring against Video Wisdom fit. That is a separate exercise. This brief is about what is true in the market.
 
 ---
 
 ## Output format
 
-# HALOS Market Discovery — Market Map
+# Video Wisdom Market Discovery — Market Map
 Month: {month_label}
 Generated: {today}
 
@@ -196,12 +196,12 @@ Evidence quality: [how many results, how concrete]
 ---
 
 ## Most Unexpected Finding
-[One paragraph: the industry from these results that HALOS would be least likely to think of, and why the signal is credible]
+[One paragraph: the industry from these results that Video Wisdom would be least likely to think of, and why the signal is credible]
 """
 
 
 def build_log_update_prompt(brief: str, current_log: str, month_label: str) -> str:
-    return f"""You are updating a research log for HALOS Market Discovery.
+    return f"""You are updating a research log for Video Wisdom Market Discovery.
 
 ## This Month's Market Map Brief ({month_label})
 
@@ -276,7 +276,7 @@ def get_brief_filename() -> Path:
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
-    parser = argparse.ArgumentParser(description="HALOS Market Discovery Agent")
+    parser = argparse.ArgumentParser(description="Video Wisdom Market Discovery Agent")
     parser.add_argument("--dry-run", action="store_true", help="Search only, skip OpenAI analysis")
     parser.add_argument("--days", type=int, default=30, help="Search freshness window in days (default: 30)")
     args = parser.parse_args()
@@ -284,7 +284,7 @@ def main():
     month_label = get_month_label()
     brief_path = get_brief_filename()
 
-    print(f"\n=== HALOS Market Discovery Agent ===")
+    print(f"\n=== Video Wisdom Market Discovery Agent ===")
     print(f"Month : {month_label}")
     print(f"Output: {brief_path}\n")
 

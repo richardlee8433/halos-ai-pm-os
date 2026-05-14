@@ -25,20 +25,20 @@ const C = {
 
 /* ─── System Prompt ──────────────────────────────────────────────────────── */
 
-const SYSTEM = `You are Richard Lee's AI PM OS — an interactive representation of how Richard thinks and works as a Product Manager at HALOS, a Video Forensics Platform for law enforcement and security.
+const SYSTEM = `You are Richard Lee's AI PM OS — an interactive representation of how Richard thinks and works as a Product Manager at Video Wisdom, a Video Forensics Platform for law enforcement and security.
 
 Richard's background:
 - B2B video infrastructure at KKStream (helping media companies build streaming platforms)
 - B2C consumer streaming at CATCHPLAY (serving millions of users across Asia)
-- Built a working Video Insight Assistant MVP in 3 hours after receiving the HALOS JD
+- Built a working Video Insight Assistant MVP in 3 hours after receiving the Video Wisdom JD
 - Iterated to v8.1 in 7 days: dual model (GPT-4o + Gemini Flash), body cam adaptive mode, failure mode detection
 - AI-native PM: uses Claude Code and Gemini CLI as daily tools
 
-HALOS context:
+Video Wisdom context:
 - Body cameras + cloud Video Forensics Platform for law enforcement and security
 - Competitors: Axon ($2.78B revenue, Evidence.com), Motorola Solutions, Cellebrite
 - Market: DEMS $1.2–1.5B growing at 15.5% CAGR, largely unsaturated (Axon <2% global TAM penetration)
-- HALOS differentiators: AI-native (not bolted-on), open ecosystem (any body cam brand), EU-native (GDPR advantage)
+- Video Wisdom differentiators: AI-native (not bolted-on), open ecosystem (any body cam brand), EU-native (GDPR advantage)
 - Key customers: law enforcement investigators, retail security
 
 PM OS Framework:
@@ -102,7 +102,7 @@ const TAB_DATA = {
     { label: 'DEMS Market',         value: '$1.2–1.5B · 15.5% CAGR' },
     { label: 'Axon Revenue',        value: '$2.78B · ARR $1.35B' },
     { label: 'Axon TAM Penetration',value: '< 2% globally' },
-    { label: 'HALOS Advantage',     value: 'AI-native · Open ecosystem · EU-native' },
+    { label: 'Video Wisdom Advantage', value: 'AI-native · Open ecosystem · EU-native' },
     { label: 'Primary Threat',      value: 'Axon EU expansion + Cellebrite Gen AI (2025 Q1)' },
   ],
   'PM WORKFLOW': [
@@ -157,8 +157,8 @@ const ROLE_STARTERS = {
     'Walk me through the routing logic — when does the system skip the AI entirely?',
     'How do you decide when to use AI vs. a deterministic rule?',
     'How do you handle AI hallucination risk in a law enforcement context?',
-    'What is the cost model for running HALOS at 1,000 hours of footage?',
-    'What would you do in your first 30 days at HALOS?',
+    'What is the cost model for running Video Wisdom at 1,000 hours of footage?',
+    'What would you do in your first 30 days at Video Wisdom?',
   ],
   'LEGAL / QA': [
     'What GDPR exposure does the Tactical-Link Re-ID feature carry, and what are the options to resolve it?',
@@ -660,7 +660,7 @@ const S = {
 
 /* ─── Component ──────────────────────────────────────────────────────────── */
 
-export default function HalosPMOS() {
+export default function VideoWisdomPMOS() {
   const [activeTab, setActiveTab]   = useState(0);
   const [activeRole, setActiveRole] = useState('PM');
   const [messages, setMessages]     = useState([]);
@@ -801,7 +801,7 @@ export default function HalosPMOS() {
       <header style={S.header}>
         <div style={S.headerLeft}>
           <div style={S.statusDot} />
-          <span style={S.headerTitle}>HALOS AI PM OS</span>
+          <span style={S.headerTitle}>VIDEO WISDOM AI PM OS</span>
           <span style={S.headerSub}>v1.0 · RICHARD LEE</span>
         </div>
         <div style={S.headerRight}>

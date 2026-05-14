@@ -1,4 +1,4 @@
-# HALOS Market Intelligence
+# Video Wisdom Market Intelligence
 
 > **Agent:** Market Analysis
 > **Core question:** What are competitors doing and where is the user's price ceiling?
@@ -21,17 +21,17 @@
 
 > **PM 使用提示**: 數據來源不同，數字差異大。建議在對外敘事時統一使用 Grand View Research 或 IMARC 的數字（較常被引用），內部評估時關注 DEMS 狹義市場的 $1.2B 起點和 15.5% 高速成長。
 
-### HALOS 的市場定位
+### Video Wisdom 的市場定位
 
 ```
 TAM: DEM + Body Cam 雲端服務 ≈ $8–10B (2025)
 SAM: 執法機構 + 安防公司的 Video Forensics Platform ≈ $2–3B
-SOM: 先攻英國/愛爾蘭/歐洲執法市場，再擴展安防垂直
+SOM: 先攻美國/英國/歐洲執法市場，再擴展安防垂直
 
 重要基準：
 - Axon 2024 年收入 $2.1B，代表整體市場 TAM 滲透率 < 2%
 - Axon 在美國 state & local law enforcement 的滲透率 < 15%
-- 結論：市場遠未飽和，HALOS 有真實的空間
+- 結論：市場遠未飽和，Video Wisdom 有真實的空間
 ```
 
 ### 成長驅動力
@@ -70,7 +70,7 @@ SOM: 先攻英國/愛爾蘭/歐洲執法市場，再擴展安防垂直
 │  CELLEBRITE / VIDIZMO / GENETEC                     │
 │  定位: 特定功能深度，非全棧平台                       │
 ├─────────────────────────────────────────────────────┤
-│  HALOS 的機會空間 ← 在這裡                           │
+│  Video Wisdom 的機會空間 ← 在這裡                    │
 │  Video Forensics Platform from ground up            │
 │  AI-native、非遺留系統束縛                           │
 └─────────────────────────────────────────────────────┘
@@ -94,10 +94,10 @@ SOM: 先攻英國/愛爾蘭/歐洲執法市場，再擴展安防垂直
 - 主要聚焦美國，歐洲市場布局相對薄弱
 - 硬體中心思維，純 software/video forensics 體驗不是核心
 
-**HALOS 的機會點**
+**Video Wisdom 的機會點**
 - Axon 強在「資料儲存+管理」，弱在「視頻智能分析」的 investigator UX
-- 歐洲市場（HALOS 在愛爾蘭）Axon 滲透率低，GDPR 合規複雜度是 Axon 的弱點
-- 開放生態：HALOS 可整合任何 body cam 品牌，不限 Axon 硬體
+- 歐洲市場 Axon 滲透率低，GDPR 合規複雜度是 Axon 的弱點
+- 開放生態：Video Wisdom 可整合任何 body cam 品牌，不限 Axon 硬體
 
 #### Motorola Solutions（間接競爭）
 
@@ -112,13 +112,13 @@ SOM: 先攻英國/愛爾蘭/歐洲執法市場，再擴展安防垂直
 - 轉換成本高對客戶來說也是雙向的刀
 - CommandCentral 只在北美有效
 
-**HALOS 的機會點**
+**Video Wisdom 的機會點**
 - Motorola 客戶對其 BWC+DEMS 不滿意，卻因切換成本被困住
 - 針對 Motorola 用戶提供「seamless migration」可能是 GTM 切入點
 
 #### 其他值得追蹤的玩家
 
-| 公司 | 定位 | 對 HALOS 的意義 |
+| 公司 | 定位 | 對 Video Wisdom 的意義 |
 |------|------|----------------|
 | Cellebrite | 手機取證 + Guardian SaaS DEMS（2025 年加入 Gen AI） | 直接競爭，需追蹤 |
 | VIDIZMO DEMS | 最完整功能集，開放整合 | 產品參考標準 |
@@ -139,7 +139,7 @@ SOM: 先攻英國/愛爾蘭/歐洲執法市場，再擴展安防垂直
 2025 Q1: Motorola SVX（BWC+RSM 二合一）+ Assist AI 發布
 2025 Q2: CJIS v6.1 預計發布（每 6-12 月更新節奏）
 
-→ AI 整合速度加快，HALOS 的 AI-native 定位是優勢，但視窗期正在縮短
+→ AI 整合速度加快，Video Wisdom 的 AI-native 定位是優勢，但視窗期正在縮短
 ```
 
 ---
@@ -194,52 +194,52 @@ SOM: 先攻英國/愛爾蘭/歐洲執法市場，再擴展安防垂直
 
 - **CJIS v6.0**（2024 年 12 月發布）是目前最新標準，全面審計到 2027 年
 - MFA（多因素認證）自 2024 年 10 月 1 日起強制執行
-- **重要**：沒有「CJIS 認證供應商」，是機構被審計，不是供應商 — HALOS 要協助機構達標，而非宣稱自己被認證
-- 第三方供應商現在被納入合規範圍（v6.0 新要求），這是 HALOS 需要正視的責任
+- **重要**：沒有「CJIS 認證供應商」，是機構被審計，不是供應商 — Video Wisdom 要協助機構達標，而非宣稱自己被認證
+- 第三方供應商現在被納入合規範圍（v6.0 新要求），這是 Video Wisdom 需要正視的責任
 
-#### GDPR（歐洲 — HALOS 愛爾蘭基地的主要監管框架）
+#### GDPR（歐洲 — Video Wisdom 歐洲業務的主要監管框架）
 
 - 執法機構的視頻數據受 Law Enforcement Directive（LED）管轄
 - 資料留存期限、查閱權、刪除權的嚴格規定
 - 跨境資料傳輸限制
-- **HALOS 機會**: Axon（美國公司）在 GDPR 合規複雜度上處於劣勢，HALOS 作為歐洲公司有天然優勢
+- **Video Wisdom 機會**: Axon（美國公司）在 GDPR 合規複雜度上處於劣勢，Video Wisdom 的歐洲本土定位有天然優勢
 
 ---
 
 ## 4. 差異化定位框架 (Positioning)
 
-### HALOS 的核心差異化假設
+### Video Wisdom 的核心差異化假設
 
 ```
 假設 1: Video-first forensics
-現有 DEMS 是「證據倉庫」，HALOS 是「視頻調查工具」
+現有 DEMS 是「證據倉庫」，Video Wisdom 是「視頻調查工具」
 Axon Evidence 強在存儲，弱在讓偵探快速從視頻找出答案
 
 假設 2: AI-native 而非 AI-bolted-on
 Axon Draft One、Cellebrite Gen AI 都是在舊架構上貼 AI
-HALOS 從零建立，AI 是核心而非附加功能
+Video Wisdom 從零建立，AI 是核心而非附加功能
 
 假設 3: 開放生態
 Axon 和 Motorola 都是封閉生態，強迫客戶用他們的硬體
-HALOS 可以整合任何 body cam 品牌，降低客戶切換成本
+Video Wisdom 可以整合任何 body cam 品牌，降低客戶切換成本
 
 假設 4: 歐洲本土優勢
 GDPR + LED 合規對美國競爭對手是複雜度障礙
-愛爾蘭作為基地，進入歐洲執法市場有地緣優勢
+US + UK 作為基地，進入英美及歐洲執法市場有地緣優勢
 ```
 
 ### 定位聲明模板
 
 ```
 For [執法調查員] who [需要從大量 body cam footage 快速找出關鍵證據],
-HALOS is [the Video Forensics Platform built from the ground up for modern investigations].
+Video Wisdom is [the Video Forensics Platform built from the ground up for modern investigations].
 Unlike [Axon Evidence / legacy DEMS],
-HALOS [makes complex video analysis feel simple through AI-native search and timeline intelligence].
+Video Wisdom [makes complex video analysis feel simple through AI-native search and timeline intelligence].
 ```
 
 ### 訊息框架 by Stakeholder
 
-| Stakeholder | 他們關心的 | HALOS 的訊息 |
+| Stakeholder | 他們關心的 | Video Wisdom 的訊息 |
 |------------|-----------|-------------|
 | Detective / Investigator | 找到關鍵畫面的速度 | 「用語音搜索找到任何畫面，不是捲 timeline」 |
 | IT Director | CJIS 合規、整合複雜度 | 「比你現在的系統更容易達到 CJIS v6.0 標準」 |
@@ -253,9 +253,9 @@ HALOS [makes complex video analysis feel simple through AI-native search and tim
 ### 建議的市場進入順序
 
 ```
-Phase 1 (Now): 愛爾蘭 + 英國中型執法機構
+Phase 1 (Now): 美國 + 英國中型執法機構
 理由：
-- HALOS 在愛爾蘭，本土關係網絡
+- Video Wisdom 深耕 US + UK 市場，本土關係網絡
 - 英國 Met Police body cam 升級潮
 - 中型機構（200–500 警員）採購週期較短
 - Axon 在歐洲滲透率低，競爭壓力小
@@ -263,7 +263,7 @@ Phase 1 (Now): 愛爾蘭 + 英國中型執法機構
 Phase 2 (Year 2): 歐洲大陸（法語/德語市場）
 理由：
 - GDPR 優勢擴大
-- 德國智慧城市 AI surveillance 投資（HALOS 可延伸）
+- 德國智慧城市 AI surveillance 投資（Video Wisdom 可延伸）
 - 規模化前驗證產品 market fit
 
 Phase 3 (Year 3+): 美國（需要 CJIS v6.0 全面合規）
@@ -282,6 +282,7 @@ Phase 3 (Year 3+): 美國（需要 CJIS v6.0 全面合規）
 2. 提供「現有 Axon footage 的更好分析工具」
    （不替換 Axon，而是覆蓋在上面）
 3. 建立用戶黏性後，在下次合約更新時競爭主平台
+
 ```
 
 **「Crisis Entry」策略（高機率轉換點）**
@@ -310,16 +311,16 @@ Phase 3 (Year 3+): 美國（需要 CJIS v6.0 全面合規）
 
 ```
 競爭動態追蹤：
-「HALOS 是 Video Forensics Platform，競爭對手是 Axon Evidence 和 Cellebrite Guardian。
-[競爭對手名] 最近發布了 [新功能/新聞]，分析這對 HALOS 的影響：
+「Video Wisdom 是 Video Forensics Platform，競爭對手是 Axon Evidence 和 Cellebrite Guardian。
+[競爭對手名] 最近發布了 [新功能/新聞]，分析這對 Video Wisdom 的影響：
 1. 這縮短了哪個差異化優勢？
-2. HALOS 應該如何回應（加速某功能/找新差異點/忽略）？
-3. 這改變了 HALOS 的 GTM 策略嗎？」
+2. Video Wisdom 應該如何回應（加速某功能/找新差異點/忽略）？
+3. 這改變了 Video Wisdom 的 GTM 策略嗎？」
 ```
 
 ```
 客戶勝負分析：
-「HALOS 在 [機構名] 的採購評估中輸給了 [競爭對手]。
+「Video Wisdom 在 [機構名] 的採購評估中輸給了 [競爭對手]。
 已知原因是 [原因]。幫我分析：
 1. 這是系統性問題還是個案？
 2. 類似的機構還有哪些？
@@ -329,19 +330,19 @@ Phase 3 (Year 3+): 美國（需要 CJIS v6.0 全面合規）
 ```
 市場機會評估：
 「[國家/地區] 的 [執法機構類型] 正在 [趨勢/事件]。
-評估 HALOS 進入這個機會的：
+評估 Video Wisdom 進入這個機會的：
 1. 市場規模估算
-2. HALOS 的競爭優勢/劣勢
+2. Video Wisdom 的競爭優勢/劣勢
 3. 進入需要的前提條件（合規、夥伴、語言在地化）
 4. 建議的優先序（立刻/下一年/未來）」
 ```
 
 ```
 採購情報：
-「一個 [規模] 的執法機構在評估 [HALOS vs 競爭對手]。
+「一個 [規模] 的執法機構在評估 [Video Wisdom vs 競爭對手]。
 他們的關鍵決策者是 [IT Director / Police Chief / Detective]。
 幫我設計一個針對 [決策者] 的 demo 和訊息框架，
-重點突出 HALOS 在 [他們的核心關切] 的優勢。」
+重點突出 Video Wisdom 在 [他們的核心關切] 的優勢。」
 ```
 
 ---
@@ -354,7 +355,7 @@ Phase 3 (Year 3+): 美國（需要 CJIS v6.0 全面合規）
 | CJIS v6.1 新要求 | 確定（2026 Q2）| 中 | 訂閱 FBI CJIS 更新 |
 | 大型競爭者收購 AI 新創 | 高 | 高 | 追蹤 M&A 新聞 |
 | 歐洲 LED 法規收緊 | 中 | 高 | 追蹤 EU Law Enforcement Directive 更新 |
-| 政府預算削減 | 中 | 中 | 追蹤英/愛爾蘭警察預算公告 |
+| 政府預算削減 | 中 | 中 | 追蹤英/美警察預算公告 |
 | AI 在法庭的可採信度爭議 | 中 | 高 | 追蹤各國法庭 AI 證據判例 |
 
 ---
@@ -379,8 +380,7 @@ Phase 3 (Year 3+): 美國（需要 CJIS v6.0 全面合規）
   Axon_cloud_services_quarter: "$213M (2024)"
   Axon_subscription_ratio: "> 60% of revenue"
 
-HALOS定位:
-  基地: "愛爾蘭（都柏林）"
+Video Wisdom定位:
   主要市場: "執法機構、安防公司"
   核心產品: "Body camera + Video Forensics Platform"
   差異化: "AI-native, video-first, open ecosystem, EU-native"
@@ -390,5 +390,5 @@ HALOS定位:
 
 ---
 
-*HALOS Market Intelligence v1.0 — 基於公開市場數據、競爭對手財報、產業分析報告*
+*Video Wisdom Market Intelligence v1.0 — 基於公開市場數據、競爭對手財報、產業分析報告*
 *資料截止：2025 Q2 | 下次建議更新：2025 Q3（追蹤 CJIS v6.1 和競爭對手 AI 新功能）*

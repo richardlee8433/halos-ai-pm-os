@@ -1,5 +1,5 @@
 ```markdown
-# HALOS Market Discovery — Research Log
+# Video Wisdom Market Discovery — Research Log
 # Blocking questions accumulate here across monthly runs.
 # Agent reads this before each run and updates it after.
 # Status: open | confirmed | killed

@@ -1,5 +1,5 @@
 """
-HALOS Market Intelligence Agent
+Video Wisdom Market Intelligence Agent
 Runs weekly web searches, analyzes results with Claude, and writes a delta report.
 
 Usage:
@@ -90,9 +90,9 @@ def run_searches(targets: dict, days_back: int = 7) -> list[dict]:
 
 def build_analysis_prompt(search_data: list[dict], context: str, week_label: str) -> str:
     results_text = json.dumps(search_data, ensure_ascii=False, indent=2)
-    return f"""You are the Market Analysis agent for HALOS, a Video Forensics Platform for law enforcement (body cameras + digital evidence management). HALOS is based in Ireland, targeting European law enforcement first, then expanding globally.
+    return f"""You are the Market Analysis agent for Video Wisdom, a Video Forensics Platform for law enforcement (body cameras + digital evidence management). Video Wisdom is targeting US and UK law enforcement first, then expanding globally.
 
-## HALOS Market Context (your reference baseline)
+## Video Wisdom Market Context (your reference baseline)
 
 {context}
 
@@ -108,30 +108,30 @@ def build_analysis_prompt(search_data: list[dict], context: str, week_label: str
 
 Analyze the search results above and produce a weekly delta report in the exact markdown format below.
 
-## HALOS Strategic Direction (use this to judge what matters)
+## Video Wisdom Strategic Direction (use this to judge what matters)
 
-Three bets HALOS is making over the next 2–3 years:
+Three bets Video Wisdom is making over the next 2–3 years:
 
 1. SOFTWARE PLATFORM INDEPENDENCE
-   Hardware (body cameras) is becoming a commodity. HALOS's real value will be the software platform — not just processing its own camera footage, but ingesting any video source: existing CCTV systems, S3-stored footage, third-party cameras. The goal is a platform that sells on its own merits, independent of hardware.
+   Hardware (body cameras) is becoming a commodity. Video Wisdom's real value will be the software platform — not just processing its own camera footage, but ingesting any video source: existing CCTV systems, S3-stored footage, third-party cameras. The goal is a platform that sells on its own merits, independent of hardware.
    → Signals that matter: competitors launching open/agnostic video ingestion, API integrations with CCTV or cloud storage, or locking customers into closed hardware ecosystems.
 
 2. PROACTIVE INVESTIGATION PLATFORM
-   Shift from reactive ("find footage after an incident") to proactive ("system flags anomalies in real time"). Examples: detecting sounds of altercations, surfacing clips automatically before a user has to search. This moves HALOS from evidence storage toward active situational intelligence.
+   Shift from reactive ("find footage after an incident") to proactive ("system flags anomalies in real time"). Examples: detecting sounds of altercations, surfacing clips automatically before a user has to search. This moves Video Wisdom from evidence storage toward active situational intelligence.
    → Signals that matter: competitors launching real-time anomaly detection, audio AI, or proactive alerting features in law enforcement contexts.
 
 3. JOBS-TO-BE-DONE INTERFACE REDESIGN
-   HALOS is rebuilding its frontend away from the legacy "click camera → browse timeline" API-UI paradigm (10+ year old architecture). The new design filters out irrelevant footage and surfaces only key evidence — built around what the investigator needs to accomplish, not around the file system.
+   Video Wisdom is rebuilding its frontend away from the legacy "click camera → browse timeline" API-UI paradigm (10+ year old architecture). The new design filters out irrelevant footage and surfaces only key evidence — built around what the investigator needs to accomplish, not around the file system.
    → Signals that matter: competitors redesigning investigator UX, launching AI-curated evidence views, or winning deals specifically on UX grounds.
 
 ---
 
 Rules:
 - DATE FILTER (apply first): Only include a result if its published_date is within the last 30 days of {datetime.now().strftime("%Y-%m-%d")}, OR if no date is available but the content clearly references a recent event. If a result is older than 30 days and contains no new development, put it in "No Change" and note "(old news)".
-- HALOS current GTM priority: Phase 1 = Ireland + UK. Phase 2 = Europe. Phase 3 = North America (Year 3+). Signals about North America markets should not exceed 🟡 Medium Impact unless they directly affect a competitor's European strategy.
+- Video Wisdom current GTM priority: Phase 1 = US + UK. Phase 2 = Europe. Phase 3 = North America expansion (Year 3+). Signals about North America markets should not exceed 🟡 Medium Impact unless they directly affect a competitor's European strategy.
 - Only include signals where you found actual new information in the search results. If results are empty or irrelevant, put the item in "No Change".
-- For each signal, add one sentence: "Impact on HALOS: ..." explaining specifically what this means for HALOS strategy, positioning, or GTM.
-- 🔴 High Impact = directly threatens a HALOS differentiation assumption OR creates an immediate market opportunity in Phase 1/2 markets. Must be a confirmed development, not speculation.
+- For each signal, add one sentence: "Impact on Video Wisdom: ..." explaining specifically what this means for Video Wisdom strategy, positioning, or GTM.
+- 🔴 High Impact = directly threatens a Video Wisdom differentiation assumption OR creates an immediate market opportunity in Phase 1/2 markets. Must be a confirmed development, not speculation.
 - 🟡 Medium Impact = worth tracking but no immediate action needed.
 - ⚪ Low Signal = market noise, FYI only.
 - "PM Action Required" items should be specific and actionable, not vague.
@@ -139,7 +139,7 @@ Rules:
 
 ## Output format (fill in exactly this structure)
 
-# HALOS Market Intelligence — Weekly Delta
+# Video Wisdom Market Intelligence — Weekly Delta
 Period: {week_label}
 Generated: {datetime.now().strftime("%Y-%m-%d")}
 
@@ -199,7 +199,7 @@ def save_report(content: str, path: Path) -> None:
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
-    parser = argparse.ArgumentParser(description="HALOS Market Intelligence Agent")
+    parser = argparse.ArgumentParser(description="Video Wisdom Market Intelligence Agent")
     parser.add_argument("--dry-run", action="store_true", help="Search only, skip Claude analysis")
     parser.add_argument("--days", type=int, default=7, help="Search freshness window in days (default: 7)")
     args = parser.parse_args()
@@ -207,7 +207,7 @@ def main():
     week_label = get_week_label()
     report_path = get_report_filename()
 
-    print(f"\n=== HALOS Market Intelligence Agent ===")
+    print(f"\n=== Video Wisdom Market Intelligence Agent ===")
     print(f"Week : {week_label}")
     print(f"Output: {report_path}\n")
 

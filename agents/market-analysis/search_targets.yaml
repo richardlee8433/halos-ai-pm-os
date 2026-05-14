@@ -1,4 +1,4 @@
-# HALOS Market Intelligence — Search Targets
+# Video Wisdom Market Intelligence — Search Targets
 # Edit this file to add/remove/adjust search queries.
 # priority: high | medium | low
 
@@ -8,7 +8,7 @@ competitors:
     priority: high
 
   - id: axon_europe
-    query: "Axon Enterprise Europe UK Ireland law enforcement contract"
+    query: "Axon Enterprise Europe UK US law enforcement contract"
     priority: high
 
   - id: cellebrite_ai
@@ -46,7 +46,7 @@ regulatory:
 
 market_signals:
   - id: bwc_deployment
-    query: "police body camera deployment contract UK Ireland Europe 2025 2026"
+    query: "police body camera deployment contract US UK Europe 2025 2026"
     priority: high
 
   - id: dems_procurement
@@ -62,5 +62,5 @@ market_signals:
     priority: medium
 
   - id: budget_signal
-    query: "UK Ireland police budget technology investment 2025 2026"
+    query: "US UK police budget technology investment 2025 2026"
     priority: low
